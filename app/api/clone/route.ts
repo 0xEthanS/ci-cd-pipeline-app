@@ -1,6 +1,13 @@
 import { NextResponse } from "next/server";
 import { repoExists, readRepoFiles } from "@/lib/github";
 
+
+
+const ORG = process.env.GITHUB_ORGANIZATION!
+
+
+
+
 export async function POST(req: Request) {
     const { repoName } = (await req.json()) as { repoName: string };
 
@@ -8,7 +15,7 @@ export async function POST(req: Request) {
         const exists = await repoExists(repoName);
         if (!exists) {
             return NextResponse.json(
-                { error: `Repo PawPawLabs/${repoName} does not exist.` },
+                { error: `Repo ${ORG}/${repoName} does not exist.` },
                 { status: 404 }
             );
         }
@@ -16,7 +23,7 @@ export async function POST(req: Request) {
         const files = await readRepoFiles(repoName);
 
         return NextResponse.json({
-            repo: `PawPawLabs/${repoName}`,
+            repo: `${ORG}/${repoName}`,
             filesCount: files.length,
             paths: files.map((f) => f.path),
             files, // the full FileEntry[] array, same shape as your FILES const

@@ -7,7 +7,7 @@ import type { FileEntry } from "@/lib/types";
 
 
 
-const ORG = "PawPawLabs" //process.env.GITHUB_ORGANIZATION;
+const ORG = process.env.GITHUB_ORGANIZATION!
 
 function getOctokit() {
     return new Octokit({ auth: process.env.GITHUB_PAT });

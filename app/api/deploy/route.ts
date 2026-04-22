@@ -6,12 +6,21 @@ import { FILES } from "../sandbox/files";
 
 
 
+const ORG = process.env.GITHUB_ORGANIZATION!
+
+
+
 
 
 
 interface DeployRequest {
     repoName: string;
 };
+
+
+
+
+
 
 
 
@@ -35,7 +44,7 @@ export async function POST(req: Request) {
         const exists = await repoExists(repoName);
         if (exists) {
             return NextResponse.json(
-                { error: `Repo PawPawLabs/${repoName} already exists.` },
+                { error: `Repo ${ORG}/${repoName} already exists.` },
                 { status: 409 }
             );
         };
