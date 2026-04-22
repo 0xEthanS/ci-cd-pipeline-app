@@ -1,4 +1,4 @@
-const files = [
+export const FILES = [
   {
     path: 'package.json',
     content: '{\n' +
